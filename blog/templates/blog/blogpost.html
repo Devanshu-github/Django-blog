@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block homeactive %} active {% endblock homeactive %}
+{% block body %}
+{% load static %}
+{% load humanize %}
+<div class="container my-4">
+    <p class="class-post-meta">
+    <h5> {{post.name}}</h5> <p> at {{post.timestamp}}</p>
+    <h2 class="blog-post-title">{{post.title}}</h2>
+    <h6>{{post.content}}</h6>
+    <hr>
+</div>
+
+<div class="container">
+    <h5>Comments ({{comments.count}})</h5>
+    <div class="my-2">
+        {% if user.is_authenticated %}
+        <form action="/blog/blogComment" method="post">
+            <div class="form-group">
+                <label for="comment">👇</label>
+                <input type="text" name="comment" class="form-control" placeholder="Enter your comment">
+            </div>
+    </div>
+    {% csrf_token %}
+    <button type="hidden" name="postSno" value="{{post.sno}}" class="btn btn-success" style="font-family: 'Fredericka the Great'"> Post</button>
+    </form>
+
+    {% else %}
+    <h7>To write a comments you need to create an account. </h7>
+    {% endif %}
+
+    {% for comment in comments  %}
+    <div class="row my-3">
+        <div class="col-md-1"><img class="rounded mx-auto b-block " src="/static/img/user.png" alt="">
+        </div>
+        <div class="col-md-11">
+            <b>{{comment.user.username}}</b> <span
+                class="badge badge-secondary">{{comment.timestamp| naturaltime}}</span>
+            <div>{{comment.comment}}</div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}

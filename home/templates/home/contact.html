@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block contactactive %} active {% endblock contactactive %}
+{% block body %}
+{% load static %}
+
+<div class="container my-4">
+    <div class="row featurette d-flex justify-content-center align-items-center">
+        <h2 style="font-family: 'Satisfy';">
+            <font size="40" style="color:blue"> <u> Contact Us </u></font> &#128172;
+        </h2>
+    </div>
+</div>
+</div>
+
+<div class="container my-4">
+    <form method="post" action="/contact">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your Name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email id</label>
+            <input type="email" class="form-control" id="eamilhelp" name="email" placeholder="name@example.com">
+        </div>
+        <div class="form-group">
+            <label for="topics">Categories</label>
+            <select class="form-control" id="topics" name="categories">
+                <option>Technical Issues</option>
+                <option>Violation of Community guidelines</option>
+                <option>Something Else</option>
+            </select>
+        </div>
+        <label for="message">Write your Message/Query</label>
+        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Type here..."></textarea>
+        <div class="container my-2">
+            <a href="#"><button class="btn btn-primary float-right"
+                    style="font-family: 'Fredericka the Great'">Submit</button></a>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}
